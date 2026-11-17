@@ -15,10 +15,12 @@ Para permitir un uso personal o compartido. Exigiendo contraseñas largas.
 
 Comunicacion segura con HTTPS para su API administrativa y SSH para su comunicacion operativa. Para proteger ante intercepcion de comunicacion.
 
-Capaz de simplemente fabricar una copia del agente de control remoto con unos clics, para los sistemas operativos soportados, auto-configurandose para conectarse al servidor.
+Capaz de simplemente fabricar una copia del agente de control remoto con unos clics, para los sistemas operativos soportados, auto-configurandose para conectarse al servidor. Con agentes fabricados en paquetes distribuibles como: ".exe", ".AppImage", ".py"
 
 Con un agente capaz de desplegarse, instalarse, y persistir con unos clics. Automatico, simple y fiable.
 Capaz de asegurar persistencia, resiliencia de conexion, y ejecucion.
+
+> Al estilo: ejecuta, y olvida (desatendido).
 
 Con una interfaz WebGUI y un selector para visualizar clientes conectados, y utilizar su terminal.
 
@@ -29,3 +31,8 @@ Para que su uso sea:
 - Fabricar un cliente
 - Desplegar (ejecutar) el cliente
 - Administrar al cliente (o los) conectado(s)
+
+Robusto, simple, fiable, seguro.
+
+El servidor puede desarrollarse y ejecutarse con Python3 interpretado, y el cliente puede desarrollarse en C++, o Python.
+Podriamos utilizar por simplicidad un software cliente como OpenSSH o AutoSSH, para facilitar y reutilizar recursos (empaquetandolo con el software distribuido), o reimplementar el funcionamiento si resulta conveniente o necesario.
