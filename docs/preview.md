@@ -17,6 +17,8 @@ Comunicacion segura con HTTPS para su API administrativa y SSH para su comunicac
 
 Capaz de simplemente fabricar una copia del agente de control remoto con unos clics, para los sistemas operativos soportados, auto-configurandose para conectarse al servidor. Con agentes fabricados en paquetes distribuibles como: ".exe", ".AppImage", ".py"
 
+> Quizas con BuildKit, o PyInstaller
+
 Con un agente capaz de desplegarse, instalarse, y persistir con unos clics. Automatico, simple y fiable.
 Capaz de asegurar persistencia, resiliencia de conexion, y ejecucion.
 
