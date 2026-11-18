@@ -1,40 +1,58 @@
-# Previsualizacion objetivo
+# Previsualización del producto
 
-Imaginamos al sistema como:
+## Visión
 
-Un sistema capaz de desplegarse en un VPS de forma simple y automatica. En unos clics/comandos.
-Compatible con el sistema operativo GNU/Linux Ubuntu, y Python3.
+SimpleSSH es un sistema pequeño y directo para acceder a **terminales interactivas de múltiples dispositivos remotos** desde una interfaz WebGUI.
 
-Capaz de configurarse para su uso, acceso y consumo publico y remoto.
-Para poder utilizarlo desde mi celular, y mi computador, mediante un navegador. Con alta compatibilidad.
+El servidor se despliega en un VPS GNU/Linux y centraliza la administración de las conexiones. El usuario accede desde un navegador, selecciona un dispositivo conectado y utiliza su terminal.
 
-Configurable para utilizar direccionamiento con direccion IPv4/IPv6 publica y/o nombre DNS vinculado.
+El objetivo no es construir una plataforma genérica de administración remota: el resultado que debe entregar el producto es una terminal interactiva, sencilla y fiable.
 
-Capaz de configurarse para tener control de acceso mediante un solo perfil, bajo contraseña. Permitiendo la actualizacion de la contraseña unicamente desde la interfaz CLI (nunca expuesta a Internet) del sistema - solo accesible desde el VPS -
-Para permitir un uso personal o compartido. Exigiendo contraseñas largas.
+## Funcionamiento esperado
 
-Comunicacion segura con HTTPS para su API administrativa y SSH para su comunicacion operativa. Para proteger ante intercepcion de comunicacion.
+1. Contratar o disponer de un VPS GNU/Linux.
+2. Desplegar SimpleSSH en el servidor.
+3. Configurar el acceso administrativo y el direccionamiento.
+4. Instalar o ejecutar el agente correspondiente en cada dispositivo autorizado.
+5. Asignar al dispositivo un puerto de conexión mediante la API HTTP.
+6. Abrir la WebGUI desde un navegador.
+7. Seleccionar el dispositivo y utilizar su terminal interactiva.
 
-Capaz de simplemente fabricar una copia del agente de control remoto con unos clics, para los sistemas operativos soportados, auto-configurandose para conectarse al servidor. Con agentes fabricados en paquetes distribuibles como: ".exe", ".AppImage", ".py"
+## Componentes y tecnologías
 
+<<<<<<< HEAD
 > Quizas con BuildKit, o PyInstaller
 
 Con un agente capaz de desplegarse, instalarse, y persistir con unos clics. Automatico, simple y fiable.
 Capaz de asegurar persistencia, resiliencia de conexion, y ejecucion.
+=======
+- **Servidor:** Python 3 sobre GNU/Linux.
+- **API administrativa:** FastAPI sobre HTTP/HTTPS. Se utiliza para la configuración y asignación de puertos, así como para las operaciones administrativas necesarias.
+- **Comunicación operativa:** OpenSSH.
+- **Reconexión:** AutoSSH para mantener o recuperar la conexión SSH.
+- **Interfaz:** WebGUI compatible con navegadores de escritorio y móviles.
+- **Agentes:** implementaciones específicas para Windows, GNU/Linux y Termux, según las necesidades de cada plataforma.
+>>>>>>> 7be2d23dc7936eab05a657a64a0f113ef57ea346
 
-> Al estilo: ejecuta, y olvida (desatendido).
+La multiplexación se realizará mediante asignación de puertos. La API HTTP permitirá configurar y asignar esos puertos sin tener que modificar manualmente la configuración del servidor.
 
-Con una interfaz WebGUI y un selector para visualizar clientes conectados, y utilizar su terminal.
+## Decisiones de implementación
 
-Para que su uso sea:
-- Contratar un VPS
-- Desplegar al servidor
-- Configurar al servidor (autenticacion, direccionamiento, etc.)
-- Fabricar un cliente
-- Desplegar (ejecutar) el cliente
-- Administrar al cliente (o los) conectado(s)
+No se reinventará SSH. SimpleSSH utilizará OpenSSH para el transporte y las sesiones remotas, y AutoSSH cuando se necesite recuperación automática de conexiones.
 
-Robusto, simple, fiable, seguro.
+No se impondrá una abstracción multiplataforma. Si las diferencias entre sistemas operativos hacen más simple, fiable o mantenible disponer de agentes separados, se desarrollarán agentes especializados para Windows, GNU/Linux y Termux.
 
-El servidor puede desarrollarse y ejecutarse con Python3 interpretado, y el cliente puede desarrollarse en C++, o Python.
-Podriamos utilizar por simplicidad un software cliente como OpenSSH o AutoSSH, para facilitar y reutilizar recursos (empaquetandolo con el software distribuido), o reimplementar el funcionamiento si resulta conveniente o necesario.
+Tampoco se crearán capas, mecanismos de extensibilidad o abstracciones preventivas. Se elegirá la solución más sencilla que permita completar y consolidar el producto.
+
+## Requisitos de operación y seguridad
+
+- Comunicación cifrada mediante SSH y HTTPS.
+- Autenticación y autorización para el acceso administrativo y los dispositivos.
+- Asignación de puertos controlada por el servidor.
+- Conexiones identificables y revocables.
+- Instalación y persistencia mediante mecanismos normales y visibles de cada plataforma, con posibilidad de detener y desinstalar el agente.
+- La interfaz pública no debe exponer la administración del sistema operativo anfitrión ni permitir accesos no autorizados.
+
+## Resultado esperado
+
+Un sistema que pueda desplegarse en un VPS, configurar desde una API HTTP y utilizarse desde un navegador para abrir terminales interactivas de los dispositivos autorizados.
